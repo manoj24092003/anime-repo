@@ -22,17 +22,13 @@ app.get("/stream", (req, res) => {
       res.writeHead(remoteRes.statusCode, {
         "Content-Type": remoteRes.headers["content-type"] || "video/mp4",
         "Content-Length": remoteRes.headers["content-length"],
-        "Accept-Ranges": "bytes",
         ...(remoteRes.headers["content-range"]
           ? { "Content-Range": remoteRes.headers["content-range"] }
           : {})
       });
     })
-    .pipe(res)
-    .on("error", (err) => res.sendStatus(500));
+    .pipe(res);
 });
 
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, "0.0.0.0", () =>
-  console.log(`Server running on port ${PORT}`)
-);
+app.listen(PORT, () => console.log("Running on " + PORT));
