@@ -1,1 +1,1 @@
-# telegram-proxy
+# anime repo
